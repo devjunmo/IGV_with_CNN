@@ -98,4 +98,4 @@ for idx in range(label_df.shape[0]):
 
 
 # label_df.to_excel(root_dir + 'T6_only_check.xlsx')
-label_df.to_csv(root_dir + 'T6_only_check.csv')
+label_df.to_csv(root_dir + 'T6_only_check2.csv')
