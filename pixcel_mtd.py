@@ -64,6 +64,8 @@ print(range(label_df.shape[0]))
 # print(label_dict)
 # exit(0)
 
+
+
 for idx in range(label_df.shape[0]):
     chr = label_df.loc[idx, 'chr']
     end = label_df.loc[idx, 'end']
