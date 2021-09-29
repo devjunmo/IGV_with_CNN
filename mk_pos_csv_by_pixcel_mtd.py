@@ -8,7 +8,7 @@ import shutil
 import cv2
 import numpy as np
 
-# 이미지 디렉토리 읽어서, T-only 가져오고, 해당 포지션을 bed포맷으로 리턴
+# 이미지 디렉토리 읽어서, bed파일로 T-only 가져오고, 해당 포지션을 bed포맷으로 리턴
 
 root_img_dir = r'E:/igv_img/SNP_Ter*/'
 snapshot_path = r'for_detect_t_only_snapshots/*'
