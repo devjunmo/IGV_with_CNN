@@ -1,5 +1,3 @@
-
-
 import os
 import subprocess as sp
 from glob import glob
@@ -12,20 +10,20 @@ from glob import glob
 # 각 디렉토리 내부의 *.bed파일 가져오기\
 
 
-root_dir = r'/myData/Teratoma_WGS/'
-bed_files = r'bedfiles/SNP_*.bed'
+root_dir = r'/myData/UTUC_WES/gdc/3rd/sub_case/127/'
+bed_files = r'*.bed'
 batch_output_dir_name = r'batch_files/'
 
 snapshot_root_dir = root_dir + 'snapshots/'
-b_script_img_output_root = r'E:\\IGV_DATA\\Teratoma_WGS\\snapshots\\' # batch script에 넣을 문자열. 윈도우 IGV에서 읽을수 있어야 함
-b_script_sfx = 'WESsp'
+b_script_img_output_root = r'E:\\IGV_DATA\\UTUC_WES\\gdc\\3rd\\sub_case\\127\\snapshots\\' # batch script에 넣을 문자열. 윈도우 IGV에서 읽을수 있어야 함
+b_script_sfx = 'sp'
 
-img_dir_name = 'for_detect_not_calling_WGS'
+img_dir_name = 'specific_imgs'
 
 batch_output_dir = root_dir + batch_output_dir_name
 
 if os.path.isdir(snapshot_root_dir) is False:
-    os.mkdir(snapshot_root_dir)
+    os.makedirs(snapshot_root_dir)
 
 if os.path.isdir(batch_output_dir) is False:
     os.mkdir(batch_output_dir)
@@ -36,7 +34,7 @@ input_bed_lst = glob(root_dir + bed_files)
 
 for i in range(len(input_bed_lst)):
     bed_path = input_bed_lst[i]
-    bed_name = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[-1] # Teratoma-9
+    bed_name = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[0] # Teratoma-9
     var_type = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[-2] # SNP
     output_path = batch_output_dir + var_type + '_' + bed_name + '_' + b_script_sfx + '.batch'
 
@@ -46,7 +44,7 @@ for i in range(len(input_bed_lst)):
     if os.path.isdir(img_dir) is False:
         os.makedirs(img_dir)
 
-    sp.call(rf'bedtools igv -path {b_script_img_dir} -sort base -slop 1 -i {bed_path} > {output_path}', shell=True)
+    sp.call(rf'bedtools igv -path {b_script_img_dir} -sort base -slop 50 -i {bed_path} > {output_path}', shell=True)
 
 
 
