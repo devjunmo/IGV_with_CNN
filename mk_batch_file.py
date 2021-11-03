@@ -9,14 +9,13 @@ from glob import glob
 # SNP_로 시작하는 디렉토리들 가져오기
 # 각 디렉토리 내부의 *.bed파일 가져오기\
 
-
-root_dir = r'/myData/UTUC_WES/gdc/3rd/sub_case/127/'
+root_dir = r'/myData/UTUC_WES/gdc/4th/sub_case/1/'
 bed_files = r'*.bed'
 batch_output_dir_name = r'batch_files/'
 
 snapshot_root_dir = root_dir + 'snapshots/'
 b_script_img_output_root = r'E:\\IGV_DATA\\UTUC_WES\\gdc\\3rd\\sub_case\\127\\snapshots\\' # batch script에 넣을 문자열. 윈도우 IGV에서 읽을수 있어야 함
-b_script_sfx = 'sp'
+b_script_sfx = 'utuc_5th'
 
 img_dir_name = 'specific_imgs'
 
@@ -29,14 +28,16 @@ if os.path.isdir(batch_output_dir) is False:
     os.mkdir(batch_output_dir)
 
 
-input_bed_lst = glob(root_dir + bed_files)
+input_bed_lst = glob(os.path.join(root_dir, bed_files))
 
 
 for i in range(len(input_bed_lst)):
     bed_path = input_bed_lst[i]
-    bed_name = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[0] # Teratoma-9
-    var_type = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[-2] # SNP
-    output_path = batch_output_dir + var_type + '_' + bed_name + '_' + b_script_sfx + '.batch'
+    bed_name = os.path.split(bed_path)[1].split(r'.')[0]
+    # bed_name = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[0] # Teratoma-9
+    # var_type = bed_path.split(r'/')[-1].split(r'.')[0].split(r'_')[-2] # SNP
+    batch_file_name = bed_name + '_' + b_script_sfx + '.batch'
+    output_path = os.path.join(batch_output_dir, batch_file_name)
 
     b_script_img_dir = rf'{b_script_img_output_root}{bed_name}\\{img_dir_name}\\' # # batch script에 넣을 문자열
     img_dir = rf'{snapshot_root_dir}{bed_name}/{img_dir_name}'
