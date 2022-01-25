@@ -7,15 +7,19 @@ from glob import glob
 # 이미지 저장할 디렉토리도 동시에 생성
 
 # SNP_로 시작하는 디렉토리들 가져오기
-# 각 디렉토리 내부의 *.bed파일 가져오기\
+# 각 디렉토리 내부의 *.bed파일 가져오기
 
-root_dir = r'/myData/UTUC_WES/gdc/4th/sub_case/1/'
+
+root_dir = r'/myData/stemcell/maf/hg38_gdc/mt_sample/29A/Tera/DP_AF_filtered_maf/exclude_filterTag_stem/' # 맨 뒤에 역슬래쉬 붙일것
 bed_files = r'*.bed'
 batch_output_dir_name = r'batch_files/'
 
 snapshot_root_dir = root_dir + 'snapshots/'
-b_script_img_output_root = r'E:\\IGV_DATA\\UTUC_WES\\gdc\\3rd\\sub_case\\127\\snapshots\\' # batch script에 넣을 문자열. 윈도우 IGV에서 읽을수 있어야 함
-b_script_sfx = 'utuc_5th'
+# b_script_img_output_root = r'E:\\UTUC_data\\gdc_hg38\\maf\\5th\\DP_AF_filtered_maf\\exclude_filterTag_utuc\\subcase\\3\\snapshots\\' # batch script에 넣을 문자열. 윈도우 IGV에서 읽을수 있어야 함
+b_script_img_output_root = r'E:\\stemcell\\maf\\hg38_gdc\\mt_sample\\29A\\Tera\\DP_AF_filtered_maf\\exclude_filterTag_stem\\snapshots\\'
+
+b_script_sfx = '29A_Tera'
+# b_script_sfx = 'stem_29_clone'
 
 img_dir_name = 'specific_imgs'
 
@@ -39,7 +43,7 @@ for i in range(len(input_bed_lst)):
     batch_file_name = bed_name + '_' + b_script_sfx + '.batch'
     output_path = os.path.join(batch_output_dir, batch_file_name)
 
-    b_script_img_dir = rf'{b_script_img_output_root}{bed_name}\\{img_dir_name}\\' # # batch script에 넣을 문자열
+    b_script_img_dir = rf'{b_script_img_output_root}\\{bed_name}\\{img_dir_name}\\' # # batch script에 넣을 문자열
     img_dir = rf'{snapshot_root_dir}{bed_name}/{img_dir_name}'
     
     if os.path.isdir(img_dir) is False:
